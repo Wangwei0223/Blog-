@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- 告诉浏览器解析标准 -->
+<html>
+    <head>
+        <!-- 告诉浏览器解析类型 -->
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+        <style>
+        .parent{
+            font-size: 20px;
+        }
+        .child{
+            color: white;
+            background-color: black;
+            font-size: 2em; /*作用在font-size的时候是父font-size*/
+            height: 2em; /*作用在非font-size时是自身的font-size*/
+        }
+        /* 浏览器默认字体大小为16px，则2*16=32px，所以根元素字体大小为32px */
+        html{
+            font-size: 2rem;
+        }
+        
+        </style>
+    </head>
+
+    <body>
+        <div class="parent">
+            parent
+            <div class="child">
+                child
+            </div>
+        </div>
+    </body>
+</html>
