@@ -1,16 +1,177 @@
 <!DOCTYPE html>
 <!-- 告诉浏览器解析标准 -->
 <html>
-    <head>
-        <!-- 告诉浏览器解析类型 -->
-        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-        <link rel="stylesheet" href="./selector.css" />
-        <style>
-        
-        </style>
-    </head>
 
-    <body>
+<head>
+    <!-- 告诉浏览器解析类型 -->
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <style>
+        * {
+            color: black;
+        }
+
+        p {
+            color: red
+        }
+
+        h1 {
+            color: yellow
+        }
+
+        h2 {
+            color: green
+        }
+
+        .div1,
+        .div3 {
+            background-color: aqua;
+        }
+
+        .div1 .div2 {
+            background-color: yellow;
+        }
+
+        .div1.div2 {
+            background-color: blue;
+        }
+
+        .div2 {
+            background-color: green;
+        }
+
+        div[class] {
+            /* background-color: coral; */
+        }
+
+        .bro~p {
+            background-color: cornflowerblue;
+        }
+
+        .first:link {
+            color: cyan;
+        }
+
+        .first:visited {
+            color: chartreuse;
+        }
+
+        .dynamic:hover {
+            /*鼠标悬浮*/
+            background-color: crimson;
+        }
+
+        .dynamic:active {
+            /*正被点击*/
+            background-color: blueviolet;
+        }
+
+        .dynamic-input:focus {
+            /*获得焦点*/
+            background-color: aquamarine;
+        }
+
+        #target1:target {
+            color: cornflowerblue;
+            background-color: blueviolet;
+        }
+
+        .ul:enabled {
+            background-color: blue;
+        }
+
+        .ul:disabled {
+            background-color: burlywood;
+        }
+
+        .checked:checked {
+            color: darkcyan;
+            /*只有opera支持*/
+        }
+
+        .parent .structure:first-child{
+            background-color: burlywood;
+        }
+
+        .parent .structure:nth-child(2){
+            background-color: blueviolet;
+        }
+
+        .combine:hover::first-letter{ /*伪类的结合*/
+            color: chartreuse;
+        }
         
-    </body>
+        .element::first-letter{
+            /* 第一个非标点的, 有标点包括标点 */
+            color: red;
+        }
+
+        .element::first-line{
+            color: blue;
+        }
+
+        .be-af::before{
+            content: '插在前面的话';
+            color: red;
+            background-color: black;
+        }
+
+        .be-af::after{
+            content: '插在后面的话';
+            color: darkorange;
+            background-color: black; 
+        }
+
+        .be-af::-moz-selection{
+            content: '选中后添加';
+            color: cornflowerblue;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <p>我是王维</p>
+    <h1>h1</h1>
+    <h2>h2</h2>
+    <div class="div1">
+        div1
+        <div class="div2">包含在div1 中的孩子 div2</div>
+        <div class="div1 div2">div1 div2</div>
+    </div>
+    <div id="div2" class="div2">div2</div>
+    <div class="div3">div3</div>
+
+    <div>
+        <p class="bro">1</p>
+        <p>相邻兄弟</p>
+        <p>不相邻兄弟</p>
+    </div>
+
+    <div>
+        <a class="first" href="http://www.baidu.com">百度</a>
+        <p class="dynamic">动态伪类</p>
+        <input class="dynamic-input" type="text">
+    </div>
+
+    <div>
+        <a href="#target1">目标伪类</a>
+        <div id="target1">目标</div>
+    </div>
+
+    <input class="ul" />
+    <input class=".checked" type="checkbox" />
+
+    <div class="parent">
+        <div class="structure">第一个孩子</div>
+        <div class="structure">第二个孩子</div>
+    </div>
+
+    <div class="combine">伪类的结合</div>
+
+    <div>
+        <div class="element">@...1111伪元素选择器 <br /> 第二行</div>
+        <span class="be-af">before 和 after 选择器</span>
+    </div>
+</body>
+
 </html>
