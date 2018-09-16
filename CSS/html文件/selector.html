@@ -88,44 +88,108 @@
             /*只有opera支持*/
         }
 
-        .parent .structure:first-child{
+        .parent .structure:first-child {
             background-color: burlywood;
         }
 
-        .parent .structure:nth-child(2){
+        .parent div:nth-of-type(2) {
             background-color: blueviolet;
         }
 
-        .combine:hover::first-letter{ /*伪类的结合*/
+        .combine:hover::first-letter {
+            /*伪类的结合*/
             color: chartreuse;
         }
-        
-        .element::first-letter{
+
+        .element::first-letter {
             /* 第一个非标点的, 有标点包括标点 */
             color: red;
         }
 
-        .element::first-line{
+        .element::first-line {
             color: blue;
         }
 
-        .be-af::before{
+        .be-af::before {
             content: '插在前面的话';
             color: red;
             background-color: black;
         }
 
-        .be-af::after{
+        .be-af::after {
             content: '插在后面的话';
             color: darkorange;
-            background-color: black; 
+            background-color: black;
         }
 
-        .be-af::-moz-selection{
-            content: '选中后添加';
+        .be-af::-moz-selection {
             color: cornflowerblue;
             background-color: black;
         }
+
+        .be-af2::after {
+            content: attr(class);
+        }
+
+        .be-af2::before {
+            /*content: url(https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png);*/
+        }
+
+        .first-letter-down::first-letter {
+            float: left;
+            color: black;
+            font-size: 50px;
+        }
+
+        .ding::before {
+            content: "半圆";
+            display: block;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: cornflowerblue;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .ding::after {
+            display: block;
+            content: "";
+            width: 0;
+            height: 0;
+            border: 25px solid transparent;
+            border-top: 50px solid black;
+            margin-top: -18px;
+        }
+
+        .cube {
+            width: 0px;
+            height: 0px;
+            border: 50px solid transparent;
+            border-top: 100px solid red;
+        }
+
+        .square{
+            width: 0;
+            height: 0;
+            border: 20px solid red;
+            border-color: red royalblue gold violet;
+        }
+
+        .semi-circle{
+            width: 100px;
+            background-color: royalblue;
+            border-radius: 100px 100px 0 0; /*%注意是全部占地大小, padding + content + border*/
+	        height: 50px;
+        }
+
+        .sector {
+            width: 50px;
+            height: 50px;
+            background-color: brown;
+	        border-radius: 0px 0 100px 0;
+        }
+
     </style>
 </head>
 
@@ -169,8 +233,36 @@
     <div class="combine">伪类的结合</div>
 
     <div>
-        <div class="element">@...1111伪元素选择器 <br /> 第二行</div>
+        <div class="element">@...1111伪元素选择器
+            <br /> 第二行</div>
         <span class="be-af">before 和 after 选择器</span>
+        <div class="be-af2" data-val="自定义属性的值">before 和 after 选择器用</div>
+        <div style="width:500px;">
+            <p class="first-letter-down">
+                Spotify (/ˈspɒtɪfaɪ/) is a music streaming service developed by Swedish company Spotify Technology, which is headquartered
+                in Stockholm, Sweden. They launched their service on 7 October 2008. As of 20 August, 2018, it is available
+                in 65 regions.[7] It provides DRM-protected content from record labels and media companies. Spotify is a
+                freemium service; basic features are free with advertisements or limitations, while additional features,
+                such as improved streaming quality and music downloads, are offered via paid subscriptions. Spotify is available
+                in most of Europe, most of the Americas, Australia, New Zealand, South Africa, and parts of Asia. It is available
+                for most modern devices, including Windows, macOS, and Linux computers, iOS, Windows Phone and Android smartphones
+                and tablets, as well as the PlayStation 3, PlayStation 4 and Xbox One home consoles. Music can be browsed
+                through or searched for by parameters such as artist, album, genre, playlist, or record label. Users can
+                create, edit, and share playlists and tracks on social media, and make playlists with other users. Spotify
+                provides access to more than 35 million songs. As of July 2018, it had 180 million monthly active users,
+                including 83 million paying subscribers.[8]
+            </p>
+        </div>
+
+        <div class="ding"></div>
+
+        <div class="cube"></div>
+
+        <div class="square"></div>
+        <br />
+        <div class="semi-circle"></div>
+        <br />
+        <div class="sector"></div>
     </div>
 </body>
 
