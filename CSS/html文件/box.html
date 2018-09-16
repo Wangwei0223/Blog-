@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- 告诉浏览器解析标准 -->
+<html>
+    <head>
+        <!-- 告诉浏览器解析类型 -->
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+        <style>
+            /* padding-top自适应容器 */
+            .container{
+                float: left;
+                background-color: white;
+                width: 50%; /*div 默认是尽可能宽, 50%取body一半*/
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 1%;
+            }
+
+            .placeholder{
+                padding-top: 50%; /*也取body宽一半*/
+            }
+
+            .placeholder_::after{
+                content: "";
+                display: block;
+                padding-top: 100%; /*padding 作用在伪元素是after前的那个类的width*/
+            }
+
+            img{
+                position: absolute;
+                width: 100%;
+                top:0;
+                left: 3%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="menu">
+            <div class="container placeholder_">
+                <img src="https://raw.githubusercontent.com/Waasdadasngwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+            <div class="container placeholder_">
+                    <img src="https://raw.githubusercontent.com/Wangwei0223/markdown_photos/master/test-image/J.fla.png">
+            </div>
+        </div>
+    </body>
+</html>
