@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- 告诉浏览器解析标准 -->
+<html>
+    <head>
+        <!-- 告诉浏览器解析类型 -->
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+        <style>
+            .child{
+                width: 50%;
+                height: 50%; /*高度是内容撑开的, 要记得height是尽可能小*/
+                background-color: royalblue;
+                margin: 15px 0px;
+            }
+
+            .parent{
+                /*float: left;/*注意float变BFC的包裹性*/
+                background-color: coral;
+                overflow: hidden;
+                margin: 2px;
+            }
+
+            .box{
+                background-color: lightgreen;
+                overflow: hidden;
+            }
+
+            .void{
+                margin: 20px 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="parent">
+            <div class="child">
+                内容
+            </div>
+            <div class="child">
+                    内容
+            </div>
+        </div>
+        <div class="parent">
+            <div class="child">
+                内容
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="void"></div>
+        </div>
+    </body>
+</html>
