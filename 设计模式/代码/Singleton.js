@@ -76,12 +76,6 @@ console.log(u1 === u2);
 
 console.log(u1.getVar(), u2.getVar());
 
-/**
- * Sep 28 project proposal + Quiz
- * 
- * Vertical Scaling dont change app logic / one server / limit
- * horizontal Scaling 
- */
 
 
  // 改进 重写构造函数
