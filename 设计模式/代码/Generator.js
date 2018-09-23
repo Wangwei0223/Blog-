@@ -26,7 +26,7 @@ var s = new String('Hello world');
 var n = new Number(1);
 var b = new Boolean(true);
 
-// 延伸考题 new String 和直接定义真的一样吗
+// 延伸考题 new String() 和直接定义真的一样吗
 
 // 包装函数可以加属性进去
 
