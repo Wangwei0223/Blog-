@@ -1,0 +1,6 @@
+/**
+ * Sep 28 project proposal + Quiz
+ * 
+ * Vertical Scaling dont change app logic / one server / limit
+ * horizontal Scaling 
+ */
