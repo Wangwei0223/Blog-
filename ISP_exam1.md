@@ -284,3 +284,107 @@ Threats -> Policy -> Specification(规范) -> Design -> Implementation -> Operat
 ● Children are refinements of this goal
 ● Nodes can be conjunctive (AND) or disjunctive (OR)
 
+#### General Concept of Risk Assessment and Management
+● A risk consists of something of value (an “asset” at risk) which may lose value if a negative event occurs.
+    ○ Example: a car and its passengers are at risk in the event of an auto accident. Other people, cars, and roadside objects are also at risk
+    ○ Example: Money invested in a stock is at risk in the event that the price of the stock goes down and the owner has to sell
+● Risk analysis/assessment is the process of
+    ○ Identifying the assets at risk (cost of asset – cost of most expensive attack)
+    ○ Putting quantitative (e. g., dollars) or qualitative (e. g. low/medium/high) measures on the potential loss (impact)
+    ○ Putting quantitative (i. e., the probability) or qualitative (e. g. low/medium/high) measures on the likelihood of the event happening
+● Risk Management is a process for planning on how to control those
+risks
+
+#### Information Security Risk Analysis
+● “Risk” will usually refer to information security risk
+● Negative events are often compromises of the
+system.
+● If we are only concerned with information security risks, any asset at risk will have to be mapped back to an IT asset at risk
+● “IT assets” refer to information, IT processes/functionality, and IT systems
+● The risk management strategies that we consider are for the IT assets, but the impact is based on the real assets
+
+#### Risk Assessment(定位, 定量, 定性(low high medium))
+● Assessment: measures of the impact of an event, and the probability of an event (threat agent exploiting a vulnerability)
+● Quantitative (objective) and Qualitative (subjective) approaches both used.
+● **Quantitative approach**:
+    ○ Compute expected monetary value (impact) of loss for all “events”
+    ○ Compute the probability of each type of expected loss
+● **Qualitative approach**: use Low, Medium, High; ratings; other
+categorical scales
+
+#### Risk Management(接受, 转移, 降低, 消除)
+● Once you have risk computed for each threat you can prioritize them and for each do one of the following:
+    ○ Accept the risk - The risk is so low or so costly to mitigate that it is worth accepting.
+    ○ Transfer the risk - Transfer the risk to somebody else via insurance, warnings etc.
+    ○ Remove the risk - Remove the system component or feature associated with the risk if the feature is not worth the risk.
+    ○ Mitigate the risk - Reduce the risk with countermeasures.
+● The understanding of risks leads to policies, specifications and requirements.
+● Appropriate security mechanisms are then developed and implemented, and then deployed
+
+#### Quantitative Methodology (terminology)
+● SLE: Single Loss Expectancy
+● ARO: Annualized Rate of Occurrence
+● ALE: Annualized Loss Expectancy
+● S: Safeguard (security mechanism)
+● ALE(without S)
+● ALE(with S)
+● ACS(S): Annualized Cost of Safeguard S
+● ANB(S): Annualized Net Benefit of S
+○= ALE(without S) – ALE(with S) – ACS(S)
+● S is cost effective if ANB(S) > 0
+
+带A的全是一年单位
+
+● SLE：单一预期损失
+● ARO：年度发生率
+● ALE：年度损失预期(一年损失的钱)
+● S：保障（安全机制）
+● ALE（无S）(无S一年损失的钱)
+● ALE（带S）(有S一年损失的钱)
+● ACS（S）：年度保障成本S.(用S一年花的钱)
+● ANB（S）：S的年度净收益
+    ○ = ALE（无S） -  ALE（带S） -  ACS（S）
+● 如果ANB（S）> 0，则S具有成本效益
+
+#### Quantitative: Useful or Not?
+● Pro:
+    ○ Objective, independent process
+    ○ Solid basis for cost/benefit analysis of safeguards
+    ○ Credibility for audit, management (especially corporate management)
+    ○ This type of approach is useful for many kinds of reliability related design questions (e. g., redundant servers, etc.), where threats and likelihood of “events” can be accurately modeled statistically
+    ○ Quantitative risk assessment is the basis for insurance, risk managed portfolios, etc.
+● Con1
+    ○ In most cases, it is difficult to enumerate all types of events and get meaningful data on probability and impact
+    ○ Very time consuming, costly to do right
+    ○ Many unknowns may give a false sense of control
+    ○ Not reliable for “rare” events or “unthinkable” impacts
+
+#### Qualitative Approach
+● Establish classes of likelihood of compromise
+    ○ Low, medium, high likelihood
+● Decide on a risk management approach to each combination of (class of loss, likelihood of loss)
+● Focus effort on medium to high loss and/or medium to high likelihood items
+
+#### Confidentiality, Integrity and Availability
+● Confidentiality: Let X be a set of entities and I be some information. Then I has the property of confidentiality with respect to X if no member of X can obtain information about I.
+● Integrity: Let X be a set of entities and I some information. Then I has the property of integrity with respect to X if I is unmodifiable by X.
+● Availability: Let X be a set of entities and I a resource. Then I has the property of availability with respect to X if all members of X can access I.
+
+#### Elements of a Security Policy
+● A security policy considers all relevant aspects of confidentiality, integrity and availability.
+    ○ Confidentiality policy: Identifies information leakage and controls information flow.
+    ○ Integrity Policy: Identifies authorized ways in which information may be altered. Enforces separation of duties.
+    ○ Availability policy: Describes what services must be provided: example – a browser must be able to download pages but may optionally choose not to execute JavaScript.
+
+#### Mechanism and Policy (保证Policy的就叫Mechanism)
+● Mechanism should not be confused with policy.
+● A security mechanism is an entity or procedure that enforces some part of a security policy.
+
+#### Types of Security Policies
+● Two types of security policies have been well studied in the literature:
+    ○ A military security policy (also called government security policy) is a security policy developed primarily to provide confidentiality.
+        ■ Not worrying about trusting the object as much as disclosing the object
+    ○ A commercial security policy is a security policy developed primarily to provide integrity.
+        ■ Focus on how much the object can be trusted.
+● Also called confidentiality policy and integrity policy
+
