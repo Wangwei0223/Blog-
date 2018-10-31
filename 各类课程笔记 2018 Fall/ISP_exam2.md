@@ -354,4 +354,211 @@ https://www.cnblogs.com/limingluzhu/p/5702486.html
 
 **那么原来的执行标志x到哪里去了呢? 系统是这样规定的, 假如本来在该位上有x, 则这些特别标志 (suid, sgid, sticky) 显示为小写字母 (s, s, t).否则, 显示为大写字母 (S, S, T)**
 
+### More on suid Bit
+● Sometimes unprivileged users must perform tasks that are privileged.
+    o Change user's shell thereby modify /etc/passwd
+● UNIX allows certain programs to change UID to their owner when executed.
+    o SUID programs – change UID to owner.
+    o SGID programs – change GID to owners group.
+● ls –l command indicates if SUID or SGID
+    o-rwsr-xr-x indicates SUID
+    o-rwxr-sr-x indicates SGID
 
+### Limitations of Unix File System
+● Abbreviated ACL’s in general and UNIX in particular may not be flexible enough for many circumstances.
+● Consider the following example:
+    o 5 users: Anne, Beth, Cathy, Della and Elle.
+    o Anne wants Beth to have read-only access.
+    o She wants Cathy to write
+    o Della to only read and write
+    o Elle to only execute
+    o Above not possible with Unix file permission bits!! 
+**1. 设置用户ACL权限:指定特定用户对此文件/目录拥有的r/w/x权限**
+1. 命令格式: setfacl -m u:用户名:权限(rwx)　目录/文件名
+2. 使用示例: setfacl -m u:user1:rwx  /aclTest
+
+1、什么是ACL？
+
+ACL是Access Control List的缩写，主要的目的是提供传统的owner、group、others的read、write、execute权限之外的具体权限设置。ACL可以针对单一用户、单一文件或目录来进行r、w、x的权限设置，对于需要特殊权限的使用状况非常有帮助。
+
+2、具体命令就两个：getfacl（获取）、setfacl（设置）
+
+3、针对特定用户的方式：setfacl -m u:[用户账号列表]:[rwx]。举例：setfacl -m u:user1:rx /test/acl_test
+
+4、针对特定用户组的方式：setfacl -m g:[用户账号列表]:[rwx]。举例：setfacl -m g:group1:rx /test/acl_test
+
+5、针对有效权限mask的设置方式：setfacl -m m:[rwx]。举例：setfacl -m m:r /test/acl_test
+
+6、针对默认权限的设置方式：setfacl -m d:[ug]:用户列表:[rwx]。举例：setfacl -m d:u:user1:rx /test/acl_test
+
+
+### Augmenting Abbreviated ACL’s 
+
+### Unix Summary
+● Advantages:
+    o Some protection from most users
+    o Flexible enough to make actions possible
+● Drawbacks:
+    o Too tempting to use root privileges
+    o No way to assume some root privileges without all root privileges
+    (At least with what is described here)
+
+### OS Mechanisms–Windows (NTFS+) 
+● Some basic functionality similar to Unix
+    o Specify access for groups and users
+        ▪ Read, modify, change owner, delete, etc.
+● Some additional concepts
+    o Tokens
+    o Security attributes
+● Generally
+    o More flexibility than Unix
+        ▪ Can define new permissions
+        ▪ Can give some but not all administrator privileges
+
+### NT Domains
+● A domain is a set of computers with a central security authority
+● PDC and the BDC (Backup) must be Windows NT.
+● A domain can be set up to:(**domain的划分取决于**)
+    o Ease viewing and access to resources.
+    o Share a common user account database and security policy.
+    o Enforce a common security stance across physical, divisional, or corporate boundaries.
+    o Elimination of the need for every machine to provide its own authentication service.
+● Users authenticated to the domain, can gain access to resources, such as printing, file sharing or applications, across all of     the servers.
+
+### Access Control Lists
+● Each object contains a security descriptor, which
+has
+    o Security Identifier of the person who owns the object.
+    o The regular ACL for access permissions.
+    o The system ACL (SACL) which is used for auditing(审计),
+    o A group security identifier.
+
+### Access Control Entries ACL由ACE组成, ACE由 R W X D P O组成
+● ACL may be composed of Access Control Entries
+(ACE) which are composed of:
+    ○ Basic permissions (six individual permissions)
+        ■ Read (R), Write (W), Execute (X), Delete (D), Change Access Permissions (P), Take Ownership (O)
+    ○ Standard permissions which are combinations derived from the basic permissions.
+● ACE types:
+    ○ Access-denied ACE - Used in ACLs to deny access rights
+    ○ Access-allowed ACE - Used in ACLs to allow access rights
+    ○ System-audit ACE - Used in SACLs to generate an audit record when the trustee attempts to exercise the specified access rights
+
+### Permission Inheritance
+● Static permission inheritance (Win NT)
+    o **Initially**, subfolders inherit permissions of folder
+    o Folders and subfolders are changed independently
+    o Replace Permissions on Subdirectories command
+        ▪ Eliminates any differences in permissions
+● Dynamic permission inheritance (Win 2000)
+    o Child inherits parent permission, remains linked
+    o Parent changes are inherited, except for explicit settings
+    o Inherited and explicitly-set permissions may conflict
+        ▪ Resolution rules
+        ▪ Positive permissions are additive
+        ▪ Negative permission (deny access) takes priority
+
+### Tokens
+● Security Reference Monitor
+    o uses tokens to identify the security context of a process or thread
+● Security context
+    o privileges, accounts, and groups associated with the process or thread
+● Impersonation token
+    o thread can adopt a different security context, usually of another user
+
+### Impersonation Tokens
+● Process uses security attributes of another
+    o Client passes impersonation token to server
+● Client specifies impersonation level of server
+    o Anonymous
+        ▪ Token has no information about the client
+    o Identification
+        ▪ server obtains the SIDs of client and client's privileges, but server cannot impersonate the client
+    o Impersonation
+        ▪ server identifies and impersonates the client
+    o Delegation
+        ▪ lets server impersonate client on local, remote systems
+
+### Security Descriptor
+● Information associated with an object:
+    o Specifies who can perform actions and what actions they can perform on an object
+● Several fields
+    o SIDs for the owner and primary group of an object
+    o A Discretionary Access Control List (DACL)
+        ▪ access rights allowed or denied to users or groups
+    o A System Access Control List (SACL)
+        ▪ types of access attempts that generate audit records for the object.
+    o A set of control bits that qualify the meaning of a security descriptor or its individual members
+
+### Windows Summary
+● Advantages:
+    o Tokens provide contextual information
+    o More flexible than Unix
+● Drawbacks:
+    o Poor implementation of tokens in APIs ( historically, many just use identification)
+    o Complex for users / developers
+
+### Android Security Model User-isolation的 permission foucs on 内部组件通信
+● OS user-isolation applied to applications
+● Permission restrictions focused on intercomponent (application) communications
+
+### Android Challenges
+● Battery life
+    o Developers must conserve power
+    o Applications store the state, thus they can be stopped in order to save power and then restarted – helps with DoS
+    o Most foreground activity is never killed
+● Android market
+    o Not reviewed by Google (different from Apple)
+    o No way of stopping bad applications from showing up on market
+    o Malware writers may be able to get code onto platform: shifts focus from remote exploit to privilege escalation
+
+### Application Development Concepts
+● Activity – one-user task
+    o Example: scroll through your inbox
+    o Email client comprises many activities
+● Service – Java daemon(**守护进程**) that runs in background
+    o Example: application that streams an mp3 in background
+● Intent – asynchronous messaging system
+    o Fire an intent to switch from one activity to another
+    o Example: email app has inbox, compose activity, viewer activity
+        ▪ User clicks on inbox entry, fires an intent to the viewer activity, which then allows the user to view the email
+● Content provider
+    o Store and share data using a relational database interface
+● Broadcast receiver
+    o “mailboxes” for messages from other applications
+
+### Exploit Prevention
+● 100 open source libraries + 500 million lines new code
+    o Open source -> no obscurity
+● Goals
+    o Prevent remote attacks
+    o Secure drivers, media codecs, new and custom features
+● Overflow prevention
+    o Some stack and heap protection
+● Decided against (in initial release)
+    o stack and heap non-execute protections (due to time-to-market constraints and battery life constraints)
+o ASLR – performance impact
+    ▪ Many pre-linked images for performance
+    ▪ Can’t install different images on different devices in the factory
+We will discuss many of these topics later 
+
+### Application Sandbox
+● Application sandbox
+    o Each application runs with its UID in its own Dalvik virtual machine **每一个Android应用程序都在它自己的进程中运行，都拥有一个独立的Dalvik虚拟机实例**
+        ▪ Provides CPU protection, memory protection
+        ▪ Authenticated communication protection using Unix domain
+        sockets
+        ▪ Only ping, zygote* - run as root
+● Applications announce permission requirement
+    o Create a whitelist model – user grants access
+        ▪ But don’t want to ask user often – all questions asked at install time --- This is changing!
+    o Inter-component communication reference monitor checks permission
+*Note: spawns another process
+
+### Android Summary
+● Advantages
+    o Sandboxes applications, not "users"
+    o Focuses on more than just 'allow / disallow'
+● Drawbacks
+    o Main access control settings via a dialog box at install time
+    o Lots of trusted (?) library code
