@@ -562,3 +562,375 @@ We will discuss many of these topics later
 ● Drawbacks
     o Main access control settings via a dialog box at install time
     o Lots of trusted (?) library code
+
+## PPT2
+
+### Recall: Access Control Matrix (ACM) - Example
+● Consider system with two files and two processes. Set of rights is - r,w,x,a,o (read, write, execute, append, own).
+
+● As the number of entries increases, the complexity of the file system increases quickly, hence this system is inefficient for general use.
+
+### Capability based access control
+● Conceptually, capability is **row** of ACM, i.e. a list of rights for a subject.
+If Let O be the set of objects, R the set of rights of a system,
+and capability list c is a set of pairs. 
+Then
+Definition: Capability:= Let cap be the function that
+determines capability list c associated with subject s. The
+subject s may access oi using any right in ri.
+
+### Example
+● For the ACM we saw earlier, capability lists are: 
+
+cap(proc. 1) = {(file1, {r,w,o}), (file2, {r}),
+(proc 1, {r,w,x,o}), (proc 2, {w})}.
+
+cap(proc. 2) = {(file1, {a}), (file2, {r,o}),
+(proc 1, {r}), (proc 2, {r,w,x,o})}.
+
+### Capability Based Access Control – Implementation
+● A capability is an unforgeable “token” giving the possessor certain rights to an object.
+● This is analogous to movie ticket or ID card.
+● This "token" could be made transferable with an appropriate entry in ticket.
+● Used by Kerberos (WIN 2K).
+● To make sure capability cannot be forged:
+    o Maintained by OS.
+    o Programming language restricts access (private).
+    o **Stored in a region not accessible to users.**
+    o **The goal is to prevent forgery**
+
+### Capabilities
+● Operating system concept
+    o “… of the future and always will be …”
+    o But they are fairly widely used now!!!!
+● Examples
+o Dennis and van Horn, MIT PDP-1 Timesharing
+o Hydra, StarOS, Intel iAPX 432, Eros, …
+o Amoeba: distributed, unforgeable tickets
+
+### ACL’s vs. Capabilities
+● Two questions arise in access control systems:
+    o Given a subject, what objects can it access and how?
+    o Given an object, what subjects can access it and how?
+● Former easier to answer with capabilities and the latter is easier to answer with ACL. Why? (**因为ACL按列存储的**)
+● The latter question is more often asked, hence ACL’s used more often.
+● With more distributed processing and agent based systems, perhaps the former question will be asked more frequently in the future
+
+### ACL’s vs. Capabilities
+● ACL
+    o Associate list with each object
+    o Check user/group against list
+    o Relies on authentication: need to know user
+● Capabilities
+    o Capability is unforgeable ticket
+        ▪ Random bit sequence, or managed by OS
+        ▪ Can be passed from one process to another
+o Reference monitor checks ticket
+        ▪ Does not need to know identity of user/process
+
+### ACL’s vs. Capabilities
+● Delegation
+    o Cap: Process can pass capability at run time
+    o ACL: Try to get owner to add permission to list?
+        ▪ More common: let other process act under current user
+● Revocation
+    o ACL: Remove user or group from list
+    o Cap: Try to get capability back from process?
+        ▪ Possible in some systems if appropriate bookkeeping
+            ▪ OS knows which data is a capability
+            ▪ If capability is used for multiple resources, it has to revoke all or
+            none …
+▪ Indirection: capability points to pointer to resource
+    ▪ If C -> P -> R, then revoke capability C by setting P=0
+
+### OS Mechanisms - Amoeba
+● Distributed system
+    o Multiple processors, connected by network
+    o Process on A can start a new process on B
+    o Location of processes designed to be transparent
+● Capability-based system
+    o Each object resides on server
+    o Invoke operation through message to server
+        ▪ Send message with capability and parameters
+        ▪ Server uses object # to identify object
+        ▪ Server checks rights field to see if operation is allowed
+        ▪ Check field prevents processes from forging capabilities
+
+### Capabilities
+● Owner capability
+    o When server creates object, returns owner cap.
+        ▪ All rights bits are set to 1 (= allow operation)
+        ▪ Check field contains 48-bit random number stored by server
+● Derived capability
+    o Owner can set some rights bits to 0
+    o Calculate new check field
+● Server can verify rights and check field
+    o Without owner capability, cannot forge derived capability
+
+Protection by user-process at server; no special OS support needed
+
+### Copying Capabilities
+● Copying capability means giving rights. How do you allow copying?
+● X wants Y to read object O which X owns:
+    1.X has a capability with all bits set, flips the bit for writing to 0.
+    2.X generates a new check field using the new rights XOR the old check field using a one-way hash function. cnew = h(rnew XOR cold)
+    3.X sends the new capability to Y.
+    4.Y sends a request to the server
+    5.The server XORs the new rights with the old check field. If the hash of this is the new check field, the credential is valid. Assuming:
+    6. h(rnew XOR cold) == cnew
+
+### Revoking rights in Capability Systems
+● Check each process and delete capability? Too inefficient. How is this done efficiently?
+● One method: Use indirection. Capability does not name object but contains a pointer to an object in the global table. To revoke an entry, just invalidate the entry in the global table.
+● Amoeba: Change random check and issue new capability. This invalidates all existing capabilities.
+
+### Amoeba OS
+Summary:
+- Capability based system.
+- Provides "single-system" image.
+Pros:
+Capabilities can be derived independent of the trusted server.
+Cons:
+- What if a capability is "overheard"?
+- Revocation is painful for applications.
+
+### Custom Reference Monitors 
+●Assumptions:
+    o System knows who the user is
+        ▪ Authentication via credentials
+o Access requests pass through the gatekeeper, aka, reference monitor
+        ▪ System must not allow monitor to be bypassed
+
+● Is it easier to build a custom reference monitor when objects (access-control list) or subjects (capability-based systems) contain permissions?
+
+### Custom Reference Monitor (Cap)
+To implement a capability system:
+● Get the capability to what you want to mediate
+    o Need to ensure that restricted processes do not have a copy of this capability
+● Create a new capability for calling your reference monitor
+● Pass this capability in place of the original capability
+● Can be repeated for multiple reference monitors!
+
+### Custom Reference Monitor (ACL)
+System call interposition problems:
+● Hooks require lots of kernel code to do things right
+● Reference monitor must correctly replicate OS state / code
+    o Code is tricky (dup2, rel path / links / chroot)
+● Easy to overlook some path
+    o Most things in Unix / Linux are files (sockets, devices)
+    o We also have descriptor passing
+● Race conditions (time-of-check-to-time-of-use)
+    o Symbolic link race conditions
+    o Relative path races
+    o Argument replacement
+        ▪ Writable multi-process shared memory or threads
+
+### Custom Reference Monitor (ACL)
+System call interposition problems (cont):
+● Subsetting an interface is hard
+    o Attempt 1: Deny the creation of symlinks to files not allow unrestricted access.
+        ▪ Should prevent the impact of a race, right?
+        ▪ What about preexisting "unsafe" symlinks?
+o Attempt 2: Deny the creation and renaming of symlinks.
+    ▪ Protects against previous attacks
+    ▪ Directories may contain symlinks
+    ▪ Directories can be renamed
+o Attempt 3: Deny access through symlinks.
+    ▪ What if the path to a file contains a symlink?
+    ▪ This is hard to check / prevent
+
+### Custom Reference Monitor (ACL)
+System call interposition problems (cont):
+● Very tricky to implement correctly in practice
+● In most cases:
+    o Cannot chain reference monitors
+    o Not recommended for security
+    o Breaks applications unnecessarily
+● Isn't widely used except for debugging
+    o As a result, "custom" code ends up in kernel, etc.
+
+### Custom Reference Monitor Summary
+Capability systems:
+● Very natural and straightforward
+    o The monitor hides the current capability behind its checks and exposes a "safe" version
+    o Easy to chain multiple together
+
+Access Control List systems:
+● Hard to do custom reference monitors
+    o Difficult to implement correctly
+        ▪ Lots of corner cases to handle
+    o Cannot chain multiple together
+    o Not popular in practice
+
+### Chrome web browser
+● What is interesting about web browsers?
+    o Applications run there
+    o Important data is stored there...
+    o Browser is the “OS of the future”
+    o Protect content based on origins instead of user id
+    o Leverage OS isolation(**利用操作系统隔离**)
+
+### ecurity Architecture
+● Browser ("kernel")
+    o Full privileges (file system, networking)
+● Rendering engine
+    o Up to 20 processes
+    o Sandboxed
+● One process per plugin
+    o Full privileges of browser
+    o Sort of like a "device driver" for the browser
+
+### Chromium Threat Model
+● Malware
+    o Attacker can't write arbitrary files
+● File Theft
+    o Attacker can't read arbitrary files
+● Keylogger
+    o Attacker can't listen to the user's keystrokes in other applications
+● Out of scope
+    o Cookie theft, password theft, etc.
+
+### Components of Browser Security Policy
+● Frame-Frame relationships
+    o canScript(A,B)
+    ▪ Can Frame A execute a script that manipulates arbitrary/nontrivial DOM elements of Frame B?
+o canNavigate(A,B)
+    ▪ Can Frame A change the origin of content for Frame B?
+● Frame-principal relationships
+    o readCookie(A,S), writeCookie(A,S)
+    ▪ Can Frame A read/write cookies from site S?
+
+### Design Decisions
+● Compatibility
+    o Sites rely on the existing browser security policy
+    o The browser is only as useful as the sites it can render
+    o Rules out more “clean slate” approaches
+● Black Box
+    o Only renderer may parse HTML, JavaScript, etc.
+    o Kernel enforces coarse-grained security policy
+    o Renderer to enforces finer-grained policy decisions
+● Minimize User Decisions
+
+### Leverage OS Isolation
+● Sandbox based on four OS mechanisms
+    o A restricted token
+    o The Windows job object
+    o The Windows desktop object
+    o Windows Vista only: integrity levels
+● Specifically, the rendering engine
+    o adjusts security token by converting SIDS to DENY_ONLY, adding
+restricted SID, and calling AdjustTokenPrivileges
+o runs in a Windows Job Object, restricting ability to create new processes, read or write clipboard, ..
+o runs on a separate desktop, mitigating lax security checking of some Windows APIs
+
+### Chrome Summary
+● Pros:
+    o Backwards compatible
+    o Separate processes -> better isolation (OS)
+    o Uses multiple security techniques
+●Cons:
+o Plug-ins still represent a threat
+    ▪ Only sandboxes some plug-ins (Flash)
+    ▪ This requires work / coordination by the vendor
+
+### Information Flow Control
+● Prior approaches to access control:
+    ○ ACL: An object has a list of authorized subjects
+    ○ Capability: Only a subject with a capability can access an object
+● What else could we do to maintain confidentiality?
+
+### Information Flow Control Motivation
+Suppose that object X is sensitive (SSN, credit card info, etc.).
+● Goal: Keep X confidential
+● ACLs, capabilities, etc. all interpose(**干预**) on X
+    o This keeps an untrusted process from accessing X
+● Information Flow Control idea:
+    o Allow X to be accessed freely (read)
+    o Prevent X and information about X from being sent to untrusted parties over communication channels
+    o This contains X and prevents disclosure.
+
+### Information Flow Control
+● Goal: Don't allow credit card information to be sent
+● Tag variable and bleed information upon access
+● Example:
+    o Policy: CCN cannot be sent via network
+    o CCN data is 'tagged'
+    o Any data written by code that uses this gets tagged
+CCNfirstfour = CCN[:4]
+# CCNfirstfour is tagged
+if (len(CCN) == 16):
+correctlength = True
+...
+# correctlength is tagged with CCN
+
+### Information Channels
+● End-to-end security requires controlling information channels [Lampson 1973]
+● Storage channels: transmit information explicitly
+    o Variable assignment, writing to sockets, files
+● Covert channels: transmit by mechanisms not intended for transmitting information
+    o System load, locks …
+● Timing channels: transmit information based on when
+something happens (rather than what happens)
+
+### Declassification(解密)
+你不能阻止保密信息露出, 需要密码解决
+● Non-interference is too strong
+    o Programs release confidential information as part of normal operation
+    o "Alice will release her data after you pay her $10"
+● Idea: allow the program to release confidential data, but only through a certain computation
+● Example: logging in using a secure password
+if (password == input) login(); else fail();
+    o Information about password must be released … but only through the result of comparison
+
+### Principals
+● Principals are users, groups of users, etc.
+● Used to express fine-grained policies controlling
+use of data
+    o Individual users and groups rather than hosts
+    o Closer to the semantics of data usage policies
+● Principal hierarchy generated by the acts-for relation
+
+### Data Labels
+● Label each piece of data to indicate permitted information flows (both to and from)
+    o Label specifies a set of policies
+● Confidentiality constraints: who may read it?
+    o {Alice: Bob, Eve} label means that Alice owns this data, and Bob and Eve are permitted to read it
+    o {Alice: Charles; Bob: Charles} label means that Alice and Bob own this data but only Charles can read it
+● Integrity constraints: who may write it?
+    o {Alice ? Bob} label means that Alice owns this data, and Bob is permitted to change it
+
+### Computation Changes Labels
+● Assignment (X=Y) re-labels a variable
+    o For every policy in the label of Y, there must be a policy in the label of X that is at least as restrictive
+● Combining values
+    o Join labels together
+    o Label on data reflects all of its sources
+● Declassification (**可以重写label**)
+    o A principal can rewrite its own part of the label
+
+### Exfiltration (渗出) 就是data可以流出
+● Need a way to decide if data can be emitted
+    o Use a trusted 'exfiltration' function
+        ▪ Can be per user or global
+        ▪ Declassify / remove labels
+        ▪ How do you code this effectively?
+
+### Web Tax Example
+
+### Quick Summary
+● Data gets 'tagged'
+    ○ Tags are propagated as data flows through the system
+● Upon exfiltration, tags are checked:
+    ○ Requires user authentication
+    ○ Unclear how easy it is to write good exfiltration logic
+    ○ Covert channels are now a major security risk
+
+### Jif
+● Jif: Java with information flow control
+● Represent principals as Java classes
+● Jif augments Java types with labels
+oint {Alice:Bob} x;
+oObject {L} o;
+● Subtyping follows the [order] (lattice order)
+● Type inference
+oProgrammer may omit types; Jif will infer them from how values are used in expressions
