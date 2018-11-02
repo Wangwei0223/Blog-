@@ -934,3 +934,145 @@ oObject {L} o;
 ● Subtyping follows the [order] (lattice order)
 ● Type inference
 oProgrammer may omit types; Jif will infer them from how values are used in expressions
+
+## PPT3
+### The operating system's role
+
+### Why Virtualize?
+What does an OS do?
+    Mediate access between processes (namespace)
+        File system permissions are hard to get right.
+
+Provide a programming abstraction
+    Very broad and complex. Hard to restrict.
+
+Restrict resource consumption
+    Are the OS hooks good enough?
+
+### Resource Isolation
+It is critical to isolate "principals" from each other to provide availability.
+
+Principle of least common mechanism / complete mediation!
+
+One technique to circumvent this is, have more resources and flood a site with network traffic, requests, etc.
+
+Once very popular, but sites are smarter now
+
+The most threatening attacks deal with a mismatch of effort
+
+### Fork Bomb
+Write a script that loops while forking copies of itself
+The operating system can get overwhelmed
+Historically, it can be hard to regain control
+Why can't root simply kill the process?
+Answer: This requires you login and start
+processes to send the appropriate signals. It may not be
+possible for this to happen given the workload from the forked
+script instances
+
+### Filling Memory
+One can also write a program that takes all available memory.
+Historically: this will cause other programs to swap, slowing
+the whole system.
+apt package manager:
+- Used by Debian, Ubuntu, and many other popular
+distributions
+- Updates software on Linux machines
+- Runs as root
+- Would download an update first, then check it
+- Would download until the server stops sending
+- Filling memory causes the system to slow to the point that it
+is unusable
+
+### Filling Disk
+One can also write a program that takes all available disk space.
+Historically: this will cause nearly everything to crash on the
+system. Programmers do not expect logging writes to fail!
+yum package manager:
+- Used by RedHat, Fedora, and many other popular distributions
+- Updates software on Linux machines
+- Runs as root
+- Would download an update first, writing it to disk
+- Would download until the server stops sending
+- Fills the disk, crashes and prints no error.
+Can't even write the problem to the syslog!
+
+### Why Does Resource Isolation Matter?
+
+Easy for one (badly coded) process to bring down a system(**导致系统崩溃**)
+● Apache / HTTP supports "range queries" of documents
+    o It is possible to request multiple ranges in the same packet
+    o What happens if you request 5-6, 5-7, 5-8, 5-9, 5-10,...?
+        ▪ Apache had a flaw where it copied the file for each range (CVE-2011-3192). This effectively filled all memory.
+    o What happens if you request 0-, 0-, 0-, ... ?
+        ▪ They decided to restrict the number of ranges in a request.
+
+### Another Example
+SSL communication requires the server and client to do expensive operations.
+● Some servers support requesting renegotiation
+    o This means the server redoes the expensive part of its work
+● The client can rapidly request this
+    o This can cause the server to grind to a halt
+(Note this was overhyped in the media)
+
+### OS As A Reference Monitor
+● Collection of running processes and files
+    o Processes are associated with users
+    o Files have access control lists (ACLs) saying which users can read/write/execute them
+● OS enforces a variety of safety policies
+    o File accesses are checked against file’s ACL
+    o Process cannot write into memory of another process
+    o Some operations require superuser privileges
+        ▪ But may need to switch back and forth (e.g., setuid in Unix)
+    o Enforce CPU sharing, disk quotas, etc.(**强制CPU共享, 磁盘配额**)
+● Same policy for all processes of the same user
+
+### Hardware / Architecture mechanisms
+● TLB: Translation Lookaside Buffer
+    o Maps virtual to physical addresses
+    o Located next to the cache
+    o Only “supervisor process” can manipulate TLB
+        ▪ But if OS is compromised, malicious code can abuse TLB to make itself invisible in virtual memory (Shadow Walker)
+● TLB miss raises a page fault exception
+    o Control is transferred to OS (in supervisor mode)
+    o OS brings the missing page to the memory
+● This is an expensive context switch
+
+● TLB：Translation Lookaside Buffer
+    o 将虚拟地图映射到物理地址
+    o 位于缓存旁边
+    o 只有“主管进程”才能操纵TLB
+        ▪ 但是，如果操作系统受到威胁，恶意代码可能滥用TLB使其自身在虚拟内存中不可见（Shadow Walker）
+● TLB未命中引发页面错误异常
+    o 控制转移到OS（在管理员模式下）
+    o OS将缺少的页面带入内存
+● 这是一个昂贵的上下文切换
+
+### Modern Hardware Meets Security
+● Modern hardware: large number of registers, big memory pages
+● Principle of least privilege → each process should live in its own hardware address space
+
+### Isolation at Multiple Levels
+● Data security
+    o Each VM is managed independently
+        ▪ Possibly different OS, disks (files, registry), MAC address (IP address)
+        ▪ Data sharing is often impossible;
+        ▪ Mandatory I/O interposition
+● Fault isolation
+    o Crashes are contained within a VM
+● Performance
+    o Should be able to guarantee performance levels
+● No assumptions required for software inside a VM (important
+for security!)
+
+### Native Client (NaCl)
+● Goal: download an x86 binary and run it “safely”
+    o Much better performance than JavaScript, Java, etc.
+● ActiveX: verify signature, then unrestricted
+    o Critically depends on user’s understanding of trust
+● .NET controls: IL bytecode + verification
+● Native Client: sandbox for untrusted x86 code
+    o Restricted subset of x86 assembly
+    o SFI-like sandbox ensures memory safety
+    o Restricted system interface
+    o (Close to) native performance 
