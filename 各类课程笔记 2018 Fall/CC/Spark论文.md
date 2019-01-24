@@ -47,10 +47,7 @@ val file = spark.textFile(“hdfs://…”)
 val errs = file.filter(_.contains(“ERROR”))
 val ones = errs.map(_ => 1)
 val count = ones.reduce(_+_)
-1
-2
-3
-4
+
   我们首先创建了一个分布式数据集file以表示lines集合的HDFS文件。我们转换此数据集以创建包含“ERROR”的行集合（errs），然后map每行为1，并且使用reduce把这些1相加。Filter、map和reduce的参数是Scala的语法。 
   注意errs和ones是懒惰的RDDs，它们从不实例化。反而，当reduce调用时，每个工作结点以流的方式扫描输入块以对其进行评估，执行本地reduce来添加它们，并将其本地计数发送给驱动程序。当以这种方式使用懒惰的数据集时，Spark紧密地效仿MapReduce。 
   Spark与其它框架不同的地方在于它使一些中间数据集在操作过程中持续。举个例子，如果想要重用errs数据集，我们可以创建一个它的缓存RDD，如下所示：
@@ -75,19 +72,7 @@ for (i <- 1 to ITERATIONS) {
     }
     w -= grad.value
 }
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
+
   首先，虽然我们创建了一个RDD points，但是我们通过运行一个for循环来处理它。Scala中的for关键字是使用循环体作为closures调用集合的foreach方法的语法。那就是说，代码for(p <- points) {body}等价于points.foreach(p => {body})。因此，我们正调用Spark的并行foreach操作。 
   第二，为了把梯度相加，我们使用了一个accumulator变量gradient（Vector类型）。注意循环中使用了重载操作符+=来add到gradient。Accumulator的组合和for语法允许Spark程序看起来像命令性的串行程序。实际上，这个例子与仅仅三行的logistic回归的串行版本不同。
 
@@ -106,10 +91,7 @@ for (i <- 1 to ITERATIONS) {
     M= spark.parallelize(0 until m).map(j => updateUser(j, Rb, U)).collect()
 }
 1
-2
-3
-4
-5
+
 4 实现
   Spark建立在Mesos之上，这是一个“集群操作系统”，允许多种并行应用程序以细粒度的方式共享一个集群，并且为应用程序提供启动任务的API。这个允许Spark与现有的集群计算框架（如Hadoop和MPI的Mesos端口）一起运行，并与它们共享数据。另外，建立在Mesos大大减少了必须进入Spark的编程工作。 
   Spark的核心是resilient distributed datasets的实现。作为一个例子，假设我们定义了一个缓存数据集cachedErrs，表示日志文件里的error信息，我们使用map和reduce统计其数量，就像3.1节：
@@ -119,11 +101,7 @@ val errs = file.filter(_.contains(“ERROR”))
 val cachedErrs = errs.cache()
 val ones = cachedErrs.map(_ => 1)
 val count = ones.reduce(_+_)
-1
-2
-3
-4
-5
+
   这些数据集将被存储为对象链，来捕获每个RDD的lineage。每个数据集对象**包含指向其parent的指针和如何从parent转变而来的信息**。 
   每个RDD对象实现了相同的简单接口，包含了三种操作： 
 1、 getPartitions，返回一列分区IDs 
