@@ -125,3 +125,86 @@ If K is a positive integer and k + 1 or more objects are placed into k boxes, th
 
 Pigeonhole principle
 
+复习
+
+3.26
+
+DEF: 
+If a and b are integers with a !== b, we say a devides b if there is an integer c such that b === ac or equivalent, if b / a is an integer. when a divides b we way that a is a factor or divisor of b, and b is a multiple of a. The noration a | b denotes that a divides b. We write a X b when a does not divide b.
+
+HW week4 32:
+How many strings of six lowercase letter from the English applabet contain
+
+a. the letter a ?
+b. the letter a and b? (one or both) || one or both letter a and b ? 
+
+DEF
+prime 
+An integer p > 1 is prime, if and only if the only positive divisors of p are 1 and p.
+
+DEF
+An integer p greater than 1 is called prime if the only possible factors of p are 1 and p. A positive integer that is greater than 1 and is not prime is called composite.
+
+Th1: Let a, b and c be integers, where a !== b. Than
+1. if a | b and a | c, than a | b + c
+2. if a | b, than a | bc for all integers c
+3. if a | b and b | c than a | c
+
+The division Algorotjrm
+
+Let a ne am integet and d a positive integer then there are unique integers g and r, with o <= r < d, s, t. a = dq + r. 
+In the equality given in the division algorithm, d is called the divisor, a is called the dividend, q is called quotient, and r is call the reminder. q = a dir d and r = a mod d.
+
+In mathmetics and computer science the floor function is the function that takes as input a real number X and gives as output the greatest integer less than or equal to x.  Floor(2.y) = 2
+
+Similarly, the ceil function maps X to the least integer greater or euqal to x. denoted the ceil(2.y) = 3
+
+Note that both a dir d and a mod d for a fixed d are ...on the set of integers. Futhermore, when a is a integer and d d positive integer, we have a dir d = La / d and a mod d  = a - d.
+
+What are the quotient and reminder when |0| is divided by 11?
+we have |0| = 11*q + 2, Hense, the quotient is q = |0| dir 11 and the reminder is 2 = |0| mod 11.
+
+What are the quotient and reminder when -11 is divided by 3?
+We have -11 = 3(-q) + 1
+
+What is the value of the result of multiplication of all integer is the interral of [-78, 87]
+
+Fundamental theorem of arismetic
+
+Every composite number can be written as a unique producer of powers of primes
+
+example
+20 = 4*5 = 2^2*5^1
+
+Prob: How many pairs of primes add up to 999? (997, 2)
+
+find the prime factorization of 7007
+2,3,5 do not divide 7 does, 7007 / 7 = 1001
+
+7007, 2, 3, 5 do not divide 
+7 divides 7007 / 7 = 1001
+7 divides 1001 / 7 = 143
+11 divides 143 / 11 = 13
+
+write out 7*7*11*13
+
+There are infinite many primes
+
+GCD: let a and b be integers, not both zero.
+The largest integer d such that d | a and d | b is called the greatest common divisor of a and b.
+denote gcd(a, b)
+
+What is the gcd of 24 and 36?
+The positive common divisors of 24 and 36 are 1, 2, 3, 9, 6, 12
+Hense gcd(24, 36) are 12
+
+gcd(17,22) -> no positive common divisors, so gcd(17, 22) = 1
+DEF:
+The integer a and b are relatively prime if their gcd = 1
+def:
+The integer a1, a2, a3...an are positive relatively prime if gcd(ai, aj) = 1 1<= i <= j <= n
+
+10, 17, 21- are pairwise relatively prime ?
+gcd(10, 17) = 1, gcd(10, 21) = 1, gcd(17, 21) = 1
+
+
