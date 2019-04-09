@@ -207,4 +207,39 @@ The integer a1, a2, a3...an are positive relatively prime if gcd(ai, aj) = 1 1<=
 10, 17, 21- are pairwise relatively prime ?
 gcd(10, 17) = 1, gcd(10, 21) = 1, gcd(17, 21) = 1
 
+10, 19, 24 are ?
+gcd(10, 24) = 
 
+
+4月2日
+
+information theory && number theory
+CP13
+
+How many solutions in positive integers does x^2 - y^2 = 270, have ?
+
+x^2 - y^2 = 270 
+(x + y)(x - y) = 3*3*3*5*2   
+case1: x, y both even
+even*even = 270
+2m * 2n = 270
+m *n = 135 不存在
+
+case2: x, y both odd
+
+case3: x even y odd
+
+
+x + y + z + w = 12, have ? 不允许有 0 C(11, 3)
+
+x1 + x2 + x3... xk = n 问题  C(n + k - 1, n)
+
+predictable logic for software engineering
+
+1. Direct proof
+2. proof by induction
+3. proof by induction further example
+4. recurrence 2 examples
+5. recurrence relations
+6. Fibonacci number intro ch 1
+7. discrete mathenmatics
