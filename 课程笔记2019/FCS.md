@@ -243,3 +243,157 @@ predictable logic for software engineering
 5. recurrence relations
 6. Fibonacci number intro ch 1
 7. discrete mathenmatics
+
+4.9
+Alice, Betty, and Carol took the same series of examinations. For each examniation there was one grade of X, one grade of Z
+are distinct poisitive integers. After all the exams. Alice had a total score of 20, Betty a total score of 10, and Carol a total
+score of 9. If Betty was placed first in Algebra, who was placed second in gemometry.
+
+N(x + y + z) = 39
+1, 39 impossible
+39, 1 impossible
+3 13 possible
+13 3 impossible
+
+A LAN with mesh topology has n nodes. How many links does if have?
+
+N = (n - 1) + (n - 2) +...+ 0
+
+chapter 8. The Integers
+<-1<-3<-5 7-> <-6 4-> 2->
+
+One say that an integer with a weatherrance is mobile if it can see a smaller integer.
+In our example, the integers 3, 5, 4, 7 are mobile
+Integer 1, 6, 2 are not mobile
+
+<-1<-2<-3
+
+4月16日
+
+Theodore ven Karman
+class problem:
+
+What kinds of triangles can you create by using three consecutive elements of the Fibonacci sequence ? 
+
+1 1 2 3 5 8 13
+
+Cp:
+Find the smallest integer greater than 1, that leaves a reminder of 1
+when dividers by 3, 4, 5, 6, 7, and 8 ? ans 841
+
+Apr 16 - relations and function
+23 - recurrence & mathmetics of compution
+30 - 同上
+
+May 7 
+
+14 reading day --- quiz
+
+21 - final extra point
+
+www.accessscience.com
+
+Ordered sets
+sometimes, order makes a difference. In this case, we call our collection(set) a sequece(or a list)
+
+The items in the sequence on are called entries or terms
+For sequence we use {}
+A sequence with n elements sometimes is called an n-tuple
+
+Sometimes, we will want to consider all ordered pairs(2 - tuples) where the first element is from set $ and the second from set T.
+
+This set of ordered pairs is called the Cartisian product and is denoted by SxT
+
+SxT = {(s, t) | s 属于 $, t 属于 T}
+
+S = {a, b}, T = {1, 2, 3}
+
+S x T = {(a, 1), (a, 2), (a, 3), (b, 1), (b, 2), (b, 3)}
+
+A relation such like > 属于 likes two objects and produces a statement
+
+contrast this with  + , which produces a number
+
+A relation on sets S and T is any subset of the Cartesian Product S x T
+
+The "larger than" relation for real numbers is the set L = {(x, y) | x, y 属于 实数集, x > y}
+
+(x, y) 属于 L, note: if S and T are... any relation of them can be represented as a directed graph
+
+Properties of relations 
+
+reflexity : A relation R on $x$ is reflexive if (x, x) 属于 R
+for every x 属于 $, thus equality if reflexive since x = x for every x
+as is <= (since every x <= x) However,  <  is not reflexive (< is antireflaxive)
+
+Symmetry: A relation R on S x S is Symmetry if (x, y) 属于 R implies that (y, x) 属于 R
+
+Transition: 传递
+A relation R is transitive if whenever (x, y) 属于 R and (y, z)属于 R, then (x, z) 属于 R
+< = > <= >= 包含  are all transitive
+
+A binary relation or simply, relation from S to 1 is a subset of S x T.
+given R is relation, for each pair a 属于 $, and b 属于 T, exactly one of the following is true.
+
+1. (a, b) 属于 R, we then say "a is relation to b", written a R b
+2. (a, b) 不属于 R, we then say "as is not R-related to b", written a R 斜杠 b
+
+A {1, 2, 3 ,4}  R {(1, 2), (2, 2), (2, 4), (3, 2), (3, 4), (4, 1), (4, 3)}
+
+A x A = A^2
+
+A relation R on set A is reflexive a R a(a are related to a) for every a 属于 A, that is if (a, a) 属于 R, for every a属于A, R is not reflexive if
+there exists a 属于 A, such that (a, a) 不属于 R
+
+Prob:
+Consider the following relations on the set A = {1, 2, 3, 4}
+1: R1 = {(1, 1), (1, 2), (2, 3), (1, 3), (4, 4)}
+2: R2 = {(1, 1), (1, 2), (2, 1), (2, 2), (3, 3), (4, 4)}
+3: R3 = {(1, 3), (2, 1)}
+4: R4 = 空集
+5: R5 = A x A the universal relation (Cartesian Product)
+
+R2 和 R5
+
+哪一个是自反的
+
+Symmetric and AntiSymmetric relation, 
+A relation, R on a set A is symmetric if whenever a R b then b R a, that is whenever (a, b) 属于 R, then (b, a)属于 R
+Also R is not symmetric if there exist a, b 属于 A such that (a, b) 属于 R but (b, a)不属于 R
+
+4月23日
+
+Set of vertices and a set of edges
+If you can reach any vertex from any other vertax by continuously edges, two graph is connected(otherwise disconnected)
+the degree of a vertex is the number of edges reaching if what two degree of a vertax is even or odd is important.
+
+The edges of a graph determine certain two-dimentional regions or faces of the graph. 
+
+Example:
+
+If is customary to think of a graph as living on sphere, so that the exterior regions counts as a face.
+
+Euler:
+V - E + F = 2
+
+Let g be any connected graph on a sphere, V the number of vertices, E the number of edges, F the number of faces.(把整个平米分割成几部分)
+
+Then the above formula stands true.
+
+You can expand a graph in three ways :
+1. Add one more edge to an existed vertex and terminate the edge with a vertex
+2. Add the new edge so that both ends the vertices are at the same points on the existing graph (自己圈一个环)
+3. We can add the new edge so that the two ends are at two different vertices of the existing graph
+
+Can the complete graph on 5 vertices be draw in the plane(or on a sphere)
+Without any edges crossing each other ? (Is that graph planar ? )
+If that were possible, then the resulting graph would have V = 5
+
+E = C(5, 2) = 10 and F = ? (every face would have to be a triangle)
+
+F = C(5, 3) = 10
+
+1. All examples in the chapters on graphs
+2. All examples in the chapters on probability
+3. Study the handouts on Recurrence
+4. Revisit the materials on the Pigeonhole Principle
