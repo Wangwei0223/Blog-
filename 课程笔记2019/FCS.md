@@ -397,3 +397,29 @@ F = C(5, 3) = 10
 2. All examples in the chapters on probability
 3. Study the handouts on Recurrence
 4. Revisit the materials on the Pigeonhole Principle
+
+newspaper dispensing machine 
+
+Parity Checking 奇偶校验
+
+The state table of a machine gives a state for each ordered pair (i, s), where i is an input and s is a state, it describes a function with the Cartesian product (q, d) x (v, l) as it domain and the sales of state (v, l) as its codomain
+
+A finite state machine consists of a  finite set of states S,a fintite set of inputs I, a functional of f with I x S as its domain and S as its codomain such that if i 属于 I and s 属于 S, then f(i, s) is the state two machine  moves to when it is in state s and is given input i.
+
+We many also specify two initial state so, as well as subset S' of S.
+
+The elements of S' are called the accepting states.
+
+So our parity checking machine is a FSM, with S = {e, o}, I = {空, 1} so = e, S' = {e}
+
+The function of is specified by f(空集, e) = e , f(空集, 0) = 0, f(1, e) = 0, f(1, 0) = e
+
+which corresponds to the state table
+
+www.drmodry.com
+
+Prob: Build an FSM with I = {空集, 1} that accepts a storing precisely when it ends with 空集.
+
+A string is a finite sequence of inputs. Suppose, given the string i, i2, i3, ... in, and the initial state s空, we
+successfully compute S(i, s0) = S1, then f(i2, s1) = s2, and so on, finally ending up with state sn. If sn is in s', is accepted;
+otherwise if is rejected.                                                                                                                                                                                                                                                                                                                                                         
