@@ -422,4 +422,73 @@ Prob: Build an FSM with I = {空集, 1} that accepts a storing precisely when it
 
 A string is a finite sequence of inputs. Suppose, given the string i, i2, i3, ... in, and the initial state s空, we
 successfully compute S(i, s0) = S1, then f(i2, s1) = s2, and so on, finally ending up with state sn. If sn is in s', is accepted;
-otherwise if is rejected.                                                                                                                                                                                                                                                                                                                                                         
+otherwise if is rejected.
+
+5.7
+Prob: Suppose there are 30 people in the room. What is the probability that two of them share the same birthady(day and month)?
+(Ignore leap years)
+
+1 - P(E) = A(30, 365) / 365^30
+
+a first course in discrete mathematic 看第二章
+
+https://link.springer.com/content/pdf/10.1007%2F978-0-85729-315-2.pdf
+
+Reccurance 汉诺塔 Add one more restriction between two adjacent  重要!!!!!!!!!
+
+https://www.math.toronto.edu/mathnet/questionCorner/genhanoi.html
+
+"generalizing the towers of hanoi problem" toronto
+
+2nd recurrance problem
+0, 1, 2, 3 of n
+create n length strings and 
+
+what is the formula what is the number of strings lengths n with the odd number of zeros.
+
+Graph
+
+A graph in which each edge connects two different vertices and where no two edges connect the same pair of vertices
+is called simple graph.
+
+Graphs that have multiple graph edges connecting the same vertices are called multigraphs.
+
+Two vertices u and v in an undirected graph G are called adjacent (or neighbors) in G if u and v are endpoints of an edges.
+
+The degree of an vertax in an undirected graph is the number of edges incident with it, except that a loop at a vertax contributes twice 
+to two degree. 每有一个环这个点加2
+
+What happens when we add the degrees of all the vertices of a graph G(v, e).
+
+If graph G has m edges 2m = 度之和
+
+An undirected graph has an even number of vertices of odd degree. Let v1 and v2 be the set of vertices of even degree and odd degree respectively,
+so
+2m = 奇数度和 + 偶数度和 只是为了介绍两项必为偶
+
+A complete graph on n vertices, denoted by Kn, is a simple graph that contains exactly one edge between pair of distinct vertices.
+
+A cycle Cn n>=3 consists of n vertices v1, v2, v3, ..vn and edges (v1, v2), (v2, v3), ...(vn-1, vn) and (vn, v1)
+
+We grt a wheel Wn, when we add an additional vertax to a cycle Cn, for n>=3, and connect the new vertax to each of two n vertices im Cn by new edges.
+
+biparite 
+
+A simple graph G is called bipartite if its vertax set V can be partitioned into two disjoint sets V1, V2 such that every edge in the graph
+connects a vertax in V1 and vertax in V2.
+(So that no edge in G connects two vertices in V1, or two vertices in V2)
+
+A simple graph is bipartite if and only if it is possible to assgin one of two different colors to each vertax of the graph so that no two adjacent
+vertices are assigned the same color.
+
+A complete bipartite grpah Km,n is a graph that has its vertax set partitioned into two subsets of m and n vertices, respectively, with and edge between two vertices if and only if one vertax is in the first subset and the other in the second.
+
+Rosen 10.2 P665 ex 20. Draw these graphs 
+
+P666 ex 26
+For which values of n are these graphs bipartite ?
+
+Prob:
+Solve two recurrence relation an = nan-1, subject to the condition a1 = 1
+
+an = n!
