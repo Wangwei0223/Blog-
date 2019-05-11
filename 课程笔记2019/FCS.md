@@ -282,7 +282,7 @@ Find the smallest integer greater than 1, that leaves a reminder of 1
 when dividers by 3, 4, 5, 6, 7, and 8 ? ans 841
 
 Apr 16 - relations and function
-23 - recurrence & mathmetics of compution
+23 - recurrence & mathmetics of computionE
 30 - 同上
 
 May 7 
@@ -374,6 +374,7 @@ Example:
 If is customary to think of a graph as living on sphere, so that the exterior regions counts as a face.
 
 Euler:
+此处书上没有 要细看!!!!
 V - E + F = 2
 
 Let g be any connected graph on a sphere, V the number of vertices, E the number of edges, F the number of faces.(把整个平米分割成几部分)
