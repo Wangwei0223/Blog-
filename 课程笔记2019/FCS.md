@@ -249,6 +249,8 @@ Alice, Betty, and Carol took the same series of examinations. For each examniati
 are distinct poisitive integers. After all the exams. Alice had a total score of 20, Betty a total score of 10, and Carol a total
 score of 9. If Betty was placed first in Algebra, who was placed second in gemometry.
 
+x = 8, y = 4, z = 1
+
 N(x + y + z) = 39
 1, 39 impossible
 39, 1 impossible
