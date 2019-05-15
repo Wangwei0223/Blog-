@@ -495,3 +495,151 @@ Prob:
 Solve two recurrence relation an = nan-1, subject to the condition a1 = 1
 
 an = n!
+
+5.14
+Seven Secrets
+
+有少量 概率 定义
+
+FSM有
+
+有些问题原来见过
+
+Prob:
+Niven P10. Set2 #8
+How many of the integers (whole numbers) between 10,000 and 100,000 have no digits other than 
+
+a. 6, 7, 8 ?
+_ _ _ _ _
+
+3^5
+
+b. 6, 7, 8 or 空集(0)
+注意leading zero
+_ _ _ _ _
+
+3*4*4*4*4
+
+Niven pp 14-15
+How many integers between 100 and 999 inclusive consist of distinct odd digits. (1, 3, 5, 7, 9)
+5 * 4 * 3 = P(5, 3)
+
+Prob:
+.... have distinct digits ? 
+9 * 9 * 8 = 698
+
+Prob:
+How many of the 698 are odd ? 
+1, 3, 5, 7, 9
+
+注意 answer format!!!
+8*8*5
+_ _ _
+
+Niven pp 17 Set 4 #10
+How many integers great than 53000, have the following two properties:
+a. the digits of the integer are distinct;
+b. the digits 0 and 9 do not occur in the number?
+
+Two types pf problems: 注意问法的同义词
+1.How many different arrgangements(ordered lists, permutaitons) of r objects can be formed from a set of n distinct
+objects ? P(n, r) = n! / (n - r)!
+
+2.How many different selections(unordered list, combinations) of r objects can be made form a set of n distinct object?
+C(n, r) = n! / r! (n-r)!
+
+Prob: 
+How many **different** three digits numbers can be formed (created) by using the digits 5, 6, 7, 8, 9 without repetition?
+5 * 4 * 3 注意不是C(5, 3)
+
+Prob:
+In how many different orders can 4 person be seated in attow of 4 chairs ?
+P(4, 4)
+
+Do not overthink
+
+Prob:
+How many different 4-member committees can be formeded from a delegetion of 7 members?
+C(7,4) = 7 6 5 4 / 4 3 2 1 = 35
+
+Prob:
+              binary
+How many 8-bit **strings** contain exactly three 0s. **注意是string不是number, 不用考虑 leading-zero**
+
+C(8, 3) * 5^9
+
+binary 的话 就是 C(8, 3) = 56
+
+Prob:
+An invseter is going to invest $16,000 in 4 stocks chosen from a list of 12 prepared by her broker. How many different investments are possible
+if
+1.$4000 is to be invested in each stock? 
+C(12, 4)
+2.**$6000 is to be invested in one stock, $5000 in another, $3000 in the third, and $2000 in the fourth?**
+P(12, 4) 注意是排列, 选一个6000, 一个5000, 一个3000, 一个2000 **有顺序**
+
+Prob:
+Three men and three women are going to occupy a row of six seats. In how many different arrangements can they be seated so that men occupy the two
+end seats?
+
+P(3, 2) * P(4, 4) **注意是乘不是加, 注意别一时脑抽就笔误了**
+
+Prob:
+The invester is going to purchase shares of 4 stocks chosen from a list of 12.
+How many different investments are possible if $ 5000 is to be invested in each of two stocks and $3000 in each of the others?
+
+C(12, 2) * C(10, 2) or C(12, 4) * C(4, 2)
+
+Prob:
+From among a group of six men and nine women, how many three-member committees contain only men or only women?
+C(6, 3) + C(9, 3)
+
+**注意是product rule 还是 sum rule**
+
+Prob:
+How many 8-bit binary strings contain six or more 1s?
+C(8, 6) + C(8, 7) + C(8, 8)
+
+Prob:
+How many 8-bit binary strings with exactly two 1s are such that the 1s are not adjacent?
+
+C(8, 2) - C(7, 1)  = 21
+
+If an 8-bit string contains exactly two 1s, then it must also contain exactly six 0s.
+We will consider two cases, according whether the last bit is a 0 or 1.
+If the last bit is a 0 and the two 1s are not adjacent, then each 1 is followed bt at least one 0.
+Hence we can regard the bits to be arranged as two strings of 10, and four single 0s. The number of ways to
+arrange these six groups is the number of ways to choose positions for 0s from six locations, C(6, 4).
+
+On the other hand, if the last digit is 1 and the two 1s are not adjacent, then we must arrange five zeros and one string of 1 0(the other 1 is
+reserved for the last bit). The number of must arrangement is the number of ways to choose position for the five 0s from six locations C(6, 5)
+
+C(6, 4) + C(6, 5) = 21
+
+Rosen 7.1.1 "discrete mathmatics and its applications" Rosen 7th Ed. 
+
+a card selected at random from a standard deck of 52 cards is an ace?
+P(A) = 4 / 52 = 1 / 13
+
+7.12. What is the prob that a fair dice comes up six when it is rolled ? 1 / 6
+7.13. P(odd) = 50 / 100 = 1 / 2
+7.14. P() = 30 / 366
+7.16. What is the probability that a card selected at random from standard deck of 52 cards is an ace or heart?
+P = 16 / 52
+7.1.7 What is the prob that when a coin is filpped six times in a row, it lands heads every time? (1/2)^6
+**7.1.8 What is the prob that a 5-card poker hand contains the ace of heart?**
+C(51, 4) / C(52, 5)
+7.1.9 What is the prob that a 5-card poker hand does **not** contain the queen of heart?
+C(51, 5)/ C(52, 5) or
+
+1 - [C(51, 4) / C(52, 5)]
+
+7.1.23
+What is the probability that a positive integer (not exceeding 100) selected at random is divisible by 3 or 7?
+33 + 10 / 100 
+
+21 42 63 84 
+
+go to library.nyu.edu
+
+Skillsoft Books (formerly Books24x7)
