@@ -643,3 +643,6 @@ What is the probability that a positive integer (not exceeding 100) selected at 
 go to library.nyu.edu
 
 Skillsoft Books (formerly Books24x7)
+
+5.15
+1. 记住两种 求递归通项
