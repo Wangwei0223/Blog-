@@ -646,3 +646,14 @@ Skillsoft Books (formerly Books24x7)
 
 5.15
 1. 记住两种 求递归通项
+
+重点题:
+1. There are 3^n n-digit sequences in which each digit is 0, 1 or 2. How many of
+these sequences have an odd number of Os?
+答案:-1/2 (2^n) + 1/2(4^n)
+
+注意和组合题的区分, 需要看出来到底是递归还是组合题
+
+容易错的点:
+1. 算qn的时候
+2. 算pn
