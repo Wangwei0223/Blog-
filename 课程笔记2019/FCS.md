@@ -657,3 +657,7 @@ these sequences have an odd number of Os?
 容易错的点:
 1. 算qn的时候
 2. 算pn
+
+2. 汉诺塔 2^n - 1
+不能隔柱移动: 3^n - 1
+https://www.zhihu.com/question/65706072/answer/233930808
