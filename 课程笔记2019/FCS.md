@@ -102,18 +102,18 @@ ST
 two set
 
 sometimes we want to consider all ordered pairs(2-types)
-where the element is from S adn the second is from T.
+where the first element is from S and the second is from T.
 
 The set of ordered pairs is called the Cartesian Product and is denoted bt S x T = {(a, t) | a 属于 S and t 属于 T}
 {a, b} x {1, 2} = {(a, 1), (a, 2), (b, 1), (b, 2)}
 
-How many integer from 1 to 6300 inclusive are not divisible by 3 ?
+How many integers from 1 to 6300 inclusive are not divisible by 3 ?
 
 6300 - 6300 / 3
 
 How many integers from 1 to 6300 inclusive are not divisible by 3 or 5
 
-6300 - 6330 / 3 - 6300 / 5 + 6300 / 3*5
+6300 - 6300 / 3 - 6300 / 5 + 6300 / 3*5
 
 How many integers from 1 to 6300 inclusive are not divisible by 3, 5 or 7 ?
 
@@ -145,14 +145,14 @@ An integer p > 1 is prime, if and only if the only positive divisors of p are 1 
 DEF
 An integer p greater than 1 is called prime if the only possible factors of p are 1 and p. A positive integer that is greater than 1 and is not prime is called composite.
 
-Th1: Let a, b and c be integers, where a !== b. Than
-1. if a | b and a | c, than a | b + c
-2. if a | b, than a | bc for all integers c
-3. if a | b and b | c than a | c
+Th1: Let a, b and c be integers, where a !== b. Then
+1. if a | b and a | c, then a | b + c
+2. if a | b, then a | bc for all integers c
+3. if a | b and b | c then a | c
 
 The division Algorotjrm
 
-Let a ne am integet and d a positive integer then there are unique integers g and r, with o <= r < d, s, t. a = dq + r. 
+Let a be an integer and d a positive integer then there are unique integers g and r, with o <= r < d, s, t. a = dq + r. 
 In the equality given in the division algorithm, d is called the divisor, a is called the dividend, q is called quotient, and r is call the reminder. q = a dir d and r = a mod d.
 
 In mathmetics and computer science the floor function is the function that takes as input a real number X and gives as output the greatest integer less than or equal to x.  Floor(2.y) = 2
